@@ -138,10 +138,9 @@ POST /products
 - Controle de estoque funcional
 - Uso de banco de dados persistente
 
-** 👩‍💻 Desenvolvido por Luana Monteiro.
+*👩‍💻 Desenvolvido por Luana Monteiro.*
+ *Estudante em Desenvolvimento Backend.*
 
- Estudante em Desenvolvimento Backend.
-
- 📎 Contato
-GitHub: https://github.com/luanamcrs
-LinkedIn: linkedin.com/in/luana-monteiro-818588214 **
+ *📎 Contato*
+*- GitHub: https://github.com/luanamcrs*
+*- LinkedIn: linkedin.com/in/luana-monteiro-818588214*
