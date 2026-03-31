@@ -1,4 +1,4 @@
-# 📦 Inventory System
+# 📦 Controle de Estoque - Backend com Java e Spring Boot
 
 Sistema de controle de estoque desenvolvido com **Java + Spring Boot**, com foco em prática de backend, organização em camadas e boas práticas de desenvolvimento.
 
