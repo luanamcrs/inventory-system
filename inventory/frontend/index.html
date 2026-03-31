@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📦 Controle de Estoque</h1>
+    <p id="mensagem"></p>
+
+    <div class="grid">
+
+        <!-- 📋 LISTAGEM -->
+        <div class="card">
+            <h2>📋 Produtos</h2>
+            <button onclick="listar()">🔄 Atualizar Lista</button>
+            <ul id="lista"></ul>
+        </div>
+
+        <!-- ➕ CRIAR -->
+        <div class="card">
+            <h2>➕ Criar Produto</h2>
+
+            <input id="nome" placeholder="Nome do produto">
+            <input id="preco" placeholder="Preço por unidade">
+            <input id="quantidade" placeholder="Quantidade">
+
+            <button onclick="criar()">Criar Produto</button>
+        </div>
+
+        <!-- 📈 MOVIMENTAÇÃO -->
+        <div class="card">
+            <h2>📈 Movimentação</h2>
+
+            <input id="productId" placeholder="ID do Produto">
+            <input id="qtd" placeholder="Quantidade">
+
+            <button onclick="entrada()">Entrada</button>
+            <button class="saida" onclick="saida()">Saída</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const api = "http://localhost:8080";
+
+function mensagem(texto) {
+    document.getElementById("mensagem").innerText = texto;
+}
+
+/* 🔄 LISTAR */
+function listar() {
+    fetch(api + "/products")
+        .then(res => {
+            if (!res.ok) throw new Error();
+            return res.json();
+        })
+        .then(data => {
+            const lista = document.getElementById("lista");
+            lista.innerHTML = "";
+
+            data.forEach(p => {
+                const total = Number(p.preco) * Number(p.quantidade);
+
+                let alerta = "";
+
+                // 🚨 ESTOQUE BAIXO (AGORA = 5)
+                if (p.quantidade <= 5) {
+                    alerta = `<p style="color:red; font-weight:bold;">
+                        ⚠️ Estoque baixo!
+                    </p>`;
+                }
+
+                lista.innerHTML += `
+                    <li>
+                        <strong>${p.nome}</strong><br>
+                        ID: ${p.id}<br>
+                        📦 Estoque: ${p.quantidade}<br>
+                        💰 Preço: R$ ${Number(p.preco).toFixed(2)}<br>
+                        🧾 Total: R$ ${total.toFixed(2)}<br>
+
+                        ${alerta}
+
+                        <button class="remover" onclick="remover(${p.id})">
+                            ❌ Remover
+                        </button>
+                    </li>
+                `;
+            });
+        })
+        .catch(() => {
+            mensagem("❌ Erro ao listar produtos");
+        });
+}
+
+/* ➕ CRIAR */
+function criar() {
+    const nome = document.getElementById("nome").value;
+    const preco = parseFloat(document.getElementById("preco").value);
+    const quantidade = parseInt(document.getElementById("quantidade").value);
+
+    if (!nome || isNaN(preco) || isNaN(quantidade)) {
+        mensagem("⚠️ Preencha todos os campos corretamente!");
+        return;
+    }
+
+    fetch(api + "/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            nome: nome,
+            descricao: "teste",
+            quantidade: quantidade,
+            preco: preco,
+            estoqueMinimo: 5
+        })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error();
+
+        mensagem("✅ Produto criado!");
+
+        // limpar campos
+        document.getElementById("nome").value = "";
+        document.getElementById("preco").value = "";
+        document.getElementById("quantidade").value = "";
+
+        listar();
+    })
+    .catch(() => {
+        mensagem("❌ Erro ao criar produto");
+    });
+}
+
+/* ❌ REMOVER */
+function remover(id) {
+    if (!confirm("Tem certeza que deseja remover este produto?")) {
+        return;
+    }
+
+    fetch(api + "/products/" + id, {
+        method: "DELETE"
+    })
+    .then(res => {
+        if (!res.ok) throw new Error();
+
+        mensagem("🗑️ Produto removido!");
+        listar();
+    })
+    .catch(() => {
+        mensagem("❌ Erro ao remover produto");
+    });
+}
+
+/* 📈 ENTRADA */
+function entrada() {
+    const id = parseInt(document.getElementById("productId").value);
+    const qtd = parseInt(document.getElementById("qtd").value);
+
+    if (isNaN(id) || isNaN(qtd)) {
+        mensagem("⚠️ Informe dados válidos!");
+        return;
+    }
+
+    fetch(`${api}/movements?productId=${id}&type=ENTRADA&quantidade=${qtd}`, {
+        method: "POST"
+    })
+    .then(res => {
+        if (!res.ok) throw new Error();
+
+        mensagem("📈 Entrada realizada!");
+        listar();
+    })
+    .catch(() => {
+        mensagem("❌ Erro na entrada de estoque");
+    });
+}
+
+/* 📉 SAÍDA */
+function saida() {
+    const id = parseInt(document.getElementById("productId").value);
+    const qtd = parseInt(document.getElementById("qtd").value);
+
+    if (isNaN(id) || isNaN(qtd)) {
+        mensagem("⚠️ Informe dados válidos!");
+        return;
+    }
+
+    fetch(`${api}/movements?productId=${id}&type=SAIDA&quantidade=${qtd}`, {
+        method: "POST"
+    })
+    .then(res => {
+        if (!res.ok) throw new Error();
+
+        mensagem("📉 Saída realizada!");
+        listar();
+    })
+    .catch(() => {
+        mensagem("❌ Erro na saída de estoque");
+    });
+}
+</script>
+
+</body>
+</html>
