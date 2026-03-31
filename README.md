@@ -2,8 +2,6 @@
 
 Sistema de controle de estoque desenvolvido com **Java + Spring Boot**, com foco em prática de backend, organização em camadas e boas práticas de desenvolvimento.
 
----
-
 ## 🚀 Sobre o projeto
 
 Este projeto simula um sistema real de gerenciamento de estoque, permitindo:
@@ -16,8 +14,6 @@ Este projeto simula um sistema real de gerenciamento de estoque, permitindo:
 
 O objetivo é demonstrar habilidades em desenvolvimento backend com arquitetura organizada.
 
----
-
 ## 🛠️ Tecnologias utilizadas
 
 - Java 21
@@ -27,8 +23,6 @@ O objetivo é demonstrar habilidades em desenvolvimento backend com arquitetura 
 - H2 Database  
 - Maven  
 - Lombok  
-
----
 
 ## 🧠 Conceitos aplicados
 
@@ -65,8 +59,6 @@ src/main/java/com/luana/inventory
 - Buscar por ID
 - Atualizar produto
 - Remover produto
-  
----
 
 ## 📊 Estoque
 - Controle de quantidade
@@ -77,6 +69,8 @@ src/main/java/com/luana/inventory
 - Entrada de estoque
 - Saída de estoque
 - Registro de histórico
+
+---
 
 ## Como rodar o projeto?
 
@@ -96,15 +90,11 @@ mvn spring-boot:run
 ## 🌐 Acesso ao sistema
 - API: http://localhost:8080
 - Banco H2: http://localhost:8080/h2-console
-  
----
 
 ## 📌 Configuração do banco:
 JDBC URL: jdbc:h2:file:./data/testdb
 User: sa
 Password: (vazio)
-
----
 
 ## 💾 Sobre o banco de dados
 
@@ -114,7 +104,7 @@ Este projeto utiliza o H2 Database em modo persistente, ou seja:
 - As informações não são perdidas ao reiniciar a aplicação
 - Simula um ambiente mais próximo de produção
 
----
+  ---
 
 ## 📈 Exemplo de requisição
 Criar produto
@@ -133,8 +123,6 @@ POST /products
 
 <img width="1843" height="867" alt="Captura de tela 2026-03-30 214352" src="https://github.com/user-attachments/assets/f9bd0b37-145b-4579-980b-d3317fa98cc0" />
 
----
-
 ## 🔧 Próximas melhorias
  - Validações mais robustas
  - Tratamento de erros global
@@ -143,19 +131,17 @@ POST /products
  - rontend mais completo
  - Autenticação com Spring Security
 
-⭐ Diferenciais do projeto
+## ⭐ Diferenciais do projeto
 - Arquitetura bem estruturada
 - Uso de Spring Boot
 - Separação de responsabilidades
 - Controle de estoque funcional
 - Uso de banco de dados persistente
 
-👩‍💻 Desenvolvido por
+## 👩‍💻 Desenvolvido por Luana Monteiro.
 
-Luana Monteiro
+- Estudante em Desenvolvimento Backend.
 
-Estudante em Desenvolvimento Backend.
-
-📎 Contato
+## 📎 Contato
 GitHub: https://github.com/luanamcrs
 LinkedIn: linkedin.com/in/luana-monteiro-818588214
