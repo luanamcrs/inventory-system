@@ -20,7 +20,7 @@ O objetivo é demonstrar habilidades em desenvolvimento backend com arquitetura 
 
 ## 🛠️ Tecnologias utilizadas
 
-- Java 17  
+- Java 21
 - Spring Boot  
 - Spring Web  
 - Spring Data JPA  
