@@ -48,15 +48,15 @@ O objetivo é demonstrar habilidades em desenvolvimento backend com arquitetura 
 
 ## 📁 Estrutura do projeto
 
-```bash
-src/main/java/com/luana/inventory
-│
-├── controller
-├── service
-├── repository
-├── model
-└── InventoryApplication.java
-
+```Bash 
+src/main/java/com/luana/inventory  
+│  
+├── controller  
+├── service  
+├── repository  
+├── model  
+└── InventoryApplication.java  
+```
 📌 Funcionalidades
 
 📦 Produtos
@@ -76,7 +76,7 @@ src/main/java/com/luana/inventory
 • Saída de estoque
 • Registro de histórico
 
-## Como rodar o projeto?
+Como rodar o projeto?
 
 1. Clone o repositório
 git clone https://github.com/luanamcrs/inventory-system.git
